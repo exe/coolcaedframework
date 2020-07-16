@@ -1,0 +1,17 @@
+{
+  "name": "caeds-discordjs-framework",
+  "version": "1.0.0",
+  "description": "A discord.js framework, making it easy to create commands and events, saving you the time of having to make a handler",
+  "main": "src/index.js",
+  "keywords": [
+    "discord.js",
+    "discord",
+    "discord-api",
+    "framework"
+  ],
+  "author": "Caed",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js"
+  }
+}
