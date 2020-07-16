@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A discord.js framework, making it easy to create commands and events, saving you the time of having to make a handler",
   "main": "src/index.js",
-  "repository": "exe/coolcaedframework",
+  "repository": "github:exe/coolcaedframework",
   "keywords": [
     "discord.js",
     "discord",
