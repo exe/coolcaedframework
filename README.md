@@ -2,6 +2,8 @@ A [discord.js](https://discord.js.org/#/) framework, making it easy to create co
 
 > Yes the code of this is very messy it was kinda rushed
 
+Install the framework by doing `npm install --save coolcaedframework`
+
 ### Creating the client
 Name | Type | Required | Description
 ------------ | ------------- | ------------ | ------------
