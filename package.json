@@ -1,5 +1,5 @@
 {
-  "name": "caeds-discordjs-framework",
+  "name": "coolcaedframework",
   "version": "1.0.0",
   "description": "A discord.js framework, making it easy to create commands and events, saving you the time of having to make a handler",
   "main": "src/index.js",
@@ -13,5 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "github:discordjs/discord.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }

@@ -2,7 +2,7 @@ const { Client, Collection } = require('discord.js');
 const Dispatcher = require('./Dispatcher');
 const fs = require('fs');
 
-module.exports = class EasyClient extends Client {
+module.exports = class caedClient extends Client {
     constructor(options) {
         if (!options) throw new Error('Options must be passed into the client');
 
