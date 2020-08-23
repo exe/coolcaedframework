@@ -2,7 +2,7 @@ const { Client, Collection } = require('discord.js');
 const Dispatcher = require('./Dispatcher');
 const fs = require('fs');
 
-module.exports = class caedClient extends Client {
+class CaedClient extends Client {
     constructor(options) {
         if (!options) throw new Error('Options must be passed into the client');
 
@@ -35,9 +35,7 @@ module.exports = class caedClient extends Client {
             if (!fs.existsSync(options.inhibitorsPath)) throw new Error('Inhibitors folder does not exist.')
         }
 
-        if (options.selfbot) {
-            options._tokenType = ""
-        }
+        if (options.selfbot) options._tokenType = "";
 
         super(options);
 
@@ -53,8 +51,6 @@ module.exports = class caedClient extends Client {
         this.dispatcher = new Dispatcher(this);
 
         this.commands = new Collection();
-        this.aliases = new Collection();
-        this.categories = new Collection();
         this.inhibitors = new Collection();
 
         this._loadCommands();
@@ -64,8 +60,16 @@ module.exports = class caedClient extends Client {
         this.once('ready', this._readyFixes.bind(this));
     }
 
-    _readyFixes() {
-        if (this.selfbot && !this.ownerId) this.ownerId = this.user.id;
+    async _readyFixes() {
+        if (!this.selfbot && !this.ownerId) {
+            const application = await this.fetchApplication();
+            const owner = application.owner;
+
+            if (owner.owner) this.ownerId = owner.ownerId;
+            this.ownerId = owner.id;
+        } else if (this.selfbot && !this.ownerId) {
+            this.ownerId = this.user.id;
+        }
     }
 
     login() {
@@ -76,8 +80,7 @@ module.exports = class caedClient extends Client {
         fs.readdir(this.commandsPath, (err, files) => {
             if (err) throw new Error(err);
 
-            files.filter(f => fs.statSync(this.commandsPath + "/" + f).isDirectory())
-                .forEach(folder => fs.readdirSync(this.commandsPath + "/" + folder).forEach(f => files.push(folder + "/" + f)))
+            files.filter(f => fs.statSync(this.commandsPath + "/" + f).isDirectory()).forEach(folder => fs.readdirSync(this.commandsPath + "/" + folder).forEach(f => files.push(folder + "/" + f)))
             files = files.filter(f => f.endsWith('.js'));
             if (files.length <= 0) throw new Error('No commands to load');
 
@@ -154,3 +157,5 @@ module.exports = class caedClient extends Client {
         });
     }
 }
+
+module.exports = CaedClient;

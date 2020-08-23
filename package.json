@@ -12,6 +12,7 @@
   "author": "Caed",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/form-data": "^3.0.1",
     "discord.js": "github:discordjs/discord.js"
   },
   "repository": {
@@ -19,6 +20,6 @@
     "url": "https://github.com/exe/coolcaedframework.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/exe"
   }
 }

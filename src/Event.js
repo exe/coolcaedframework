@@ -1,4 +1,4 @@
-module.exports = class Event {
+class Event {
     constructor(client, options) {
         this._validateOptions(options);
 
@@ -28,3 +28,5 @@ module.exports = class Event {
         }
     }
 }
+
+module.exports = Event;

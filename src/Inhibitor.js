@@ -1,4 +1,4 @@
-module.exports = class Inhibitor {
+class Inhibitor {
     constructor(client, options) {
         this._validateOptions(options);
         
@@ -20,3 +20,5 @@ module.exports = class Inhibitor {
         }
     }
 }
+
+module.exports = Inhibitor;

@@ -1,4 +1,4 @@
-module.exports = class Command {
+class Command {
     constructor(client, options) {
         this._validateOptions(options);
 
@@ -27,9 +27,7 @@ module.exports = class Command {
 
         this.cooldowns.set(id, {
             start: Date.now(),
-            timeout: setTimeout(() => {
-                this.cooldowns.delete(id);
-            }, this.cooldown)
+            timeout: setTimeout(() => this.cooldowns.delete(id), this.cooldown)
         });
     }
 
@@ -77,3 +75,5 @@ module.exports = class Command {
         }
     }
 }
+
+module.exports = Command;

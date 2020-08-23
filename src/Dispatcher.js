@@ -1,4 +1,4 @@
-module.exports = class Dispatcher {
+class Dispatcher {
     constructor(client) {
         this.client = client;
 
@@ -18,8 +18,7 @@ module.exports = class Dispatcher {
             const cmdInhibitors = command.inhibitors;
 
             for (let i = 0; i < cmdInhibitors.length; i++) {
-                const inhibitorsToRun = cmdInhibitors[i];
-                const inhibitor = this.client.inhibitors.get(inhibitorsToRun);
+                const inhibitor = this.client.inhibitors.get(cmdInhibitors[i]);
 
                 try {
                     const response = await inhibitor.run(msg, command);
@@ -31,23 +30,23 @@ module.exports = class Dispatcher {
         }
 
         if (command.guildOnly && !msg.guild) return;
+        if (this.client.selfbot) msg.delete();
 
         if (!this.client.selfbot && msg.author.id !== this.client.ownerId) {
             let cooldown = command.cooldowns.get(msg.author.id);
-            if (cooldown) return msg.channel.send(`You are on a cooldown for another \`${((cooldown.start + command.cooldown - Date.now()) / 1000).toFixed(1)} seconds\``)
+            let formatted = ((cooldown.start + command.cooldown - Date.now()) / 1000).toFixed(1);
+            if (cooldown) return msg.channel.send(`You are on a cooldown for another \`${formatted} seconds\``)
 
             command._cooldownUser(msg.author.id);
         }
-
-        if (this.client.selfbot) msg.delete();
 
         command.run(msg, args);
     }
 
     _validateMessage(msg) {
-        if (this.client.selfbot && msg.author.id !== this.client.ownerId) return;
-        if (msg.author.bot) return false;
         if (!msg.content) return false;
+        if (msg.author.bot) return false;
+        if (this.client.selfbot && msg.author.id !== this.client.ownerId) return false;
         if (!msg.content.startsWith(this.client.prefix)) return false;
 
         return true;
@@ -55,8 +54,8 @@ module.exports = class Dispatcher {
 
     _getCommand(command) {
         let commandArray = this.client.commands.find(cmd => cmd.name === command || cmd.aliases.includes(command));
-
-        if (commandArray) return commandArray
-        return null;
+        return commandArray ? commandArray : null;
     }
 }
+
+module.exports = Dispatcher;
