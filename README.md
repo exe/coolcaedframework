@@ -16,7 +16,7 @@ inhibitorsPath | String | `true` | The directory path for the inhibitor files
 commandsPath | String | `true` | The directory path for the command files
 
 ```js
-const { Client } = require('coolcaedFramework');
+const { Client } = require('coolcaedframework');
 const path = require('path');
 
 const client = new Client({
@@ -47,7 +47,7 @@ cooldown | Integer | `false` | Time a user should wait before doing the command 
 inhibitors | Array<String> | `false` | Inhibitors that should be ran before calling the commands run function
 
 ```js
-const { Command } = require('coolcaedFramework');
+const { Command } = require('coolcaedframework');
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -78,7 +78,7 @@ event | String | `true` | Name of the event
 once | Boolean | `false` | Should the event be ran once
 
 ```js
-const { Event } = require('coolcaedFramework');
+const { Event } = require('coolcaedframework');
 
 module.exports = class extends Event {
     constructor(...args) {
@@ -102,7 +102,7 @@ name | Type | Required | Description
 name | String | `true` | Name of the inhibitor
 
 ```js
-const { Inhibitor } = require('coolcaedFramework');
+const { Inhibitor } = require('coolcaedframework');
 
 module.exports = class extends Inhibitor {
     constructor(...args) {
